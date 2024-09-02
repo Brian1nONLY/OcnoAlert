@@ -1,20 +1,127 @@
-HOW TO USE:
---------------------------------------------------------------
-Please ensure you install all required dependencies before using this program.
---------------------------------------------------------------
-The "assets" folder is used for running main.py. main.py is a Python file that trains the ML model with photos in the train folder. It will then iterate through the validate folder which contains a bunch of randomized test images to test itself which will provide an accuracy score as well as a confusion matrix graph. 
+# OcnoAlert - Cancer Detection Machine Learning App
 
-To use the program, upload different categories of images as different folders under the "train" folder. These images will be used to train the model to understand the features of each category. The folder should already have empty folders that serve as an example of what this process may look like when it's finished. Under each of these category folders, you may upload anything similar to the category. For example, the "dog" folder should contain pictures of dogs. 
+## Description
+OcnoAlert is a machine learning application that identifies the type of cancer in medical scan images uploaded by users. The app uses the VGG16 pre-trained model to identify significant features in the images and provides predictions on the type of cancer.
 
-The validate folder should contain category folders that contain identical names to the folders you created under assets/train. However, these folders should only include examples that are different from the ones chosen in  assets/train, allowing the model to test itself. 
+## Technologies Used
+- **Python**: Main programming language.
+- **Flask**: Web framework for handling file uploads and serving the ML model.
+- **OpenCV**: Image processing for resizing and normalization.
+- **NumPy**: Numerical computations and data manipulation.
+- **Keras**: High-level neural networks API for building the ML model.
+- **TensorFlow**: Backend for executing the ML model.
+- **Matplotlib**: Plotting library for visualizing model performance.
+- **Seaborn**: Statistical data visualization.
+- **React**: Front-end framework for building the user interface.
+- **Bootstrap**: CSS framework for responsive design.
+- **Node.js**: JavaScript runtime for running the React app.
 
-The "assets1" folder is used for running server.py, which is the backend flask server used to connect the front-end functionality. You'll notice that the assets1 folder also contains a train and validate folder. In the train folder, follow the same process described for the "assets" folder. However, leave the validate folder empty as the files the user will upload in the front will be uploaded into assets1/validate/user for the program to use. 
+## How to Use
 
-To initiate the react app, you will need to cd into the client folder by using the command `cd client` in your terminal. Once you are in the client, run the command `npm start`. (Ensure you have all the dependencies required installed in the node modules folder)
+### Installation
+1. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+   Ensure all required dependencies are installed before using this program.
 
-To initiate the flask server, you will need to create a virtual environment file (venv) file inside the backend folder. To do this, run the command `python -m venv venv`. Once the virtual environment has been created, you will need to activate it by running `./venv/Scripts/activate`. Once the virtual environment has been activated, ensure you have the dependencies for the ML program installed in the venv folder. Once this is completed, run `python server.py` to start the flask server.
+### Using Kaggle Dataset
+1. **Download the Dataset**:
+   - Go to Kaggle and download the desired dataset for cancer detection. For example, you can use the "Breast Cancer Detection" dataset.
+   - Extract the downloaded dataset to your project directory.
 
-Once the react and flask server are running, test the program out! In the React app, navigate to the test page and upload a file. When you click upload, an alert will pop up to tell you if the upload is successful. You can check assets1/validate/user to ensure the file was properly uploaded. Once the file is uploaded, click the ANALYZE button to see your result. The app will take some time to run but will eventually update the diagnosis label to its predicted result. When you are finished, delete the uploaded file in assets1/validate/user to run the program again. 
+2. **Prepare Training Data**:
+   - Organize the dataset into separate folders under `assets/train`. 
+   - Example: `assets/train/breast` should contain pictures of breast cancer.
+
+3. **Prepare Validation Data**:
+   - Create identical category folders under `assets/validate` with different images for validation.
+
+### Training the Model
+1. **Run the Training Script**:
+   ```bash
+   python main.py
+   ```
+   This script trains the model using the data from the `assets/train` folder and provides an accuracy score and confusion matrix.
+
+### Running the Flask Server
+1. **Prepare Server Data**:
+   - Follow the same process for `assets1/train` as described above.
+   - Leave `assets1/validate` empty; uploaded files will go into `assets1/validate/user`.
+
+2. **Create Virtual Environment**:
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activate Virtual Environment**:
+   ```bash
+   ./venv/Scripts/activate  # Windows
+   source venv/bin/activate  # MacOS/Linux
+   ```
+
+4. **Install Dependencies in Virtual Environment**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Run Flask Server**:
+   ```bash
+   python server.py
+   ```
+
+### Running the React App
+1. **Navigate to Client Folder**:
+   ```bash
+   cd client
+   ```
+
+2. **Install Client Dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start React App**:
+   ```bash
+   npm start
+   ```
+
+### Using the App
+1. **Upload and Analyze**:
+   - In the React app, navigate to the test page and upload a file.
+   - Click the "UPLOAD" button to upload the file. Check `assets1/validate/user` to ensure the file was uploaded.
+   - Click the "ANALYZE" button to see the result. The diagnosis label will update with the predicted result.
+   
+2. **Cleanup**:
+   - Delete the uploaded file in `assets1/validate/user` to run the program again.
+
+## Folder Structure
+```
+OcnoAlert/
+│
+├── assets/
+│   ├── train/
+│   └── validate/
+│
+├── assets1/
+│   ├── train/
+│   └── validate/
+│       └── user/
+│
+├── client/
+│   ├── node_modules/
+│   └── ...
+│
+├── backend/
+│   ├── venv/
+│   └── ...
+│
+├── main.py
+├── server.py
+├── requirements.txt
+├── README.md
+└── ...
+```
 
 Happy diagnosing with OcnoAlert!
 --------------------------------------------------------------
